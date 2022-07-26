@@ -19,15 +19,14 @@ public class WeatherConsumerService {
   WeatherCRUD weatherCRUD;
 
   @KafkaListener(topics = "locations-weather", groupId = "groupId")
-  public Weather listenToWeather (String weatherStr) {
+  public void listenToWeather(String weatherStr) {
     try {
       Weather weather = om.readValue(weatherStr, Weather.class);
       weatherCRUD.save(weather);
+
     } catch (JsonProcessingException e) {
       e.printStackTrace();
     }
-
-    return weather;
   }
 
   public List<Weather> getAllWeathers() {

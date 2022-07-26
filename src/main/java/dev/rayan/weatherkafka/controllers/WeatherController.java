@@ -2,6 +2,7 @@ package dev.rayan.weatherkafka.controllers;
 
 import dev.rayan.weatherkafka.classes.Weather;
 import dev.rayan.weatherkafka.services.WeatherProducerService;
+import dev.rayan.weatherkafka.services.WeatherConsumerService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,15 +23,7 @@ public class WeatherController {
   @PostMapping(value = "/create")
   public Weather createWeather(@RequestBody Weather weather) {
 
-    producerWeather = weatherProducerService.createWeather(weather);
-    weather = weatherConsumerService.listenToWeather(producerWeather);
-    return weather;
-  }
-
-  // POST /weather/create
-  @PostMapping(value = "/create")
-  public Weather GeneratorFetcher() {
-    Weather weather;
+    weather = weatherProducerService.createWeather(weather);
     return weather;
   }
 

@@ -16,12 +16,21 @@ public class WeatherController {
 
   @Autowired
   private WeatherProducerService weatherProducerService;
+  private WeatherConsumerService weatherConsumerService;
 
   // POST /weather/create
   @PostMapping(value = "/create")
   public Weather createWeather(@RequestBody Weather weather) {
 
-    weather = weatherProducerService.createWeather(weather);
+    producerWeather = weatherProducerService.createWeather(weather);
+    weather = weatherConsumerService.listenToWeather(producerWeather);
+    return weather;
+  }
+
+  // POST /weather/create
+  @PostMapping(value = "/create")
+  public Weather GeneratorFetcher() {
+    Weather weather;
     return weather;
   }
 
@@ -29,6 +38,6 @@ public class WeatherController {
   @GetMapping("/all")
   public List<Weather> getWeathers() {
 
-    return weatherProducerService.getAllWeathers();
+    return weatherConsumerService.getAllWeathers();
   }
 }

@@ -27,6 +27,24 @@ public class WeatherController {
     return weather;
   }
 
+  /*
+   * Endpoint to get latest weather's data of all location
+   *  SELECT location, degree
+   *  FROM locations_weather
+   *  WHERE id IN (
+   *    SELECT MAX(id)
+   *    FROM locations_weather
+   *    GROUP BY location
+   *  );
+   */
+
+  /*
+   * Endpoint to get average weather of specific location
+   *  SELECT location, AVG(degree)
+   *  FROM locations_weather
+   *  GROUP BY location;
+   */
+
   // GET /weather/all
   @GetMapping("/all")
   public List<Weather> getWeathers() {
